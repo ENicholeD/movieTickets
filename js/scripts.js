@@ -91,7 +91,17 @@ Ticket.prototype.addAgePrice = function(){
 
 
 // User Interface
+var newCheckout = new Checkout();
 
 $(document).ready(function(){
+  $(".form").submit(function(event){
+    event.preventDefault();
+    var releaseDate = parseInt($("#title").val());
+    var time = parseInt($("#time").val());
+    var age = $("input:radio[name=age]:checked").val();
 
+    var newMovie = new Ticket( releaseDate, time, age);
+    newCheckout.addTicket(newMovie);
+    displayTicketDetails(newCheckout);
+  });
 });
