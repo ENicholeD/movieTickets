@@ -33,12 +33,11 @@ Checkout.prototype.removeTicket = function(id){
   }
 }
 
-
-
-
-function Ticket(releaseDate, time, age) {
+function Ticket(movieName, releaseDate, time, show, age) {
+  this.movieName = movieName,
   this.releaseDate = releaseDate,
   this.time = time,
+  this.show = show,
   this.age = age,
   this.price = [0,0,0], // price array [base, time, age]
   this.total = 0
@@ -93,15 +92,51 @@ Ticket.prototype.addAgePrice = function(){
 // User Interface
 var newCheckout = new Checkout();
 
+function displayTicketDetails(checkout){
+  var ticketList = $("#tickets");
+  var htmlTicketsToDisplay = "";
+  checkout.tickets.forEach(function(ticket){
+    htmlTicketsToDisplay += buildTicketCard(ticket);
+  });
+  ticketList.html(htmlTicketsToDisplay);
+}
+
+function buildTicketCard(ticket){
+  var markup = `
+        <div id="$ID$" class="card">
+          <div class="card-body">
+            <div class="card-text"><strong>$TITLE$</strong></div>
+            <div class="card-text">$TIME$</div>
+            <div class="card-text">$AGE$</div>
+            <div class="card-text">$$COST$</div>
+          </div>
+        </div>
+        `
+  markup = markup.replace("$ID$", ticket.id);
+  markup = markup.replace("$TITLE$", ticket.movieName);
+  markup = markup.replace("$TIME$", ticket.show);
+  markup = markup.replace("$AGE$", ticket.age);
+  markup = markup.replace("$COST$", ticket.total);
+
+  return markup;
+}
+
 $(document).ready(function(){
   $(".form").submit(function(event){
     event.preventDefault();
     var releaseDate = parseInt($("#title").val());
     var time = parseInt($("#time").val());
     var age = $("input:radio[name=age]:checked").val();
+    var name = $("#title").find("option:selected").text();
+    var show = $("#time").find("option:selected").text();
 
-    var newMovie = new Ticket( releaseDate, time, age);
-    newCheckout.addTicket(newMovie);
-    displayTicketDetails(newCheckout);
+    if(age){
+      var newMovie = new Ticket(name, releaseDate, time, show, age);
+      newMovie.calcTicketPrice();
+      newCheckout.addTicket(newMovie);
+      newCheckout.updateTotal();
+      displayTicketDetails(newCheckout);
+    }
+
   });
 });
