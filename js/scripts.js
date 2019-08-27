@@ -105,6 +105,7 @@ function buildTicketCard(ticket){
   var markup = `
         <div id="$ID$" class="card">
           <div class="card-body">
+            <button class="remove" type="button">X</button>
             <div class="card-text"><strong>$TITLE$</strong></div>
             <div class="card-text">$TIME$</div>
             <div class="card-text">$AGE$</div>
@@ -121,7 +122,16 @@ function buildTicketCard(ticket){
   return markup;
 }
 
+function attachTicketRemoveListeners(){
+  $("#tickets").on("click", ".remove", function(event){
+    newCheckout.removeTicket(parseInt(event.target.closest(".card").id));
+    displayTicketDetails(newCheckout);
+  });
+}
+
 $(document).ready(function(){
+  attachTicketRemoveListeners();
+
   $(".form").submit(function(event){
     event.preventDefault();
     var releaseDate = parseInt($("#title").val());
@@ -137,6 +147,5 @@ $(document).ready(function(){
       newCheckout.updateTotal();
       displayTicketDetails(newCheckout);
     }
-
   });
 });
