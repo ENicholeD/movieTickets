@@ -1,3 +1,7 @@
+body {
+  margin: 8px 0;
+}
+
 .remove {
   float: right;
 }
