@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
+    <title>Movies!</title>
     <script src="js/jquery-3.4.1.js" type="text/javascript"></script>
     <script src="js/scripts.js" type="text/javascript"></script>
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -9,33 +9,38 @@
   </head>
   <body>
     <div class="container">
-      <form class="form" action="index.html" method="post">
-        <label>Movie Title</label>
-        <select id="title">
-          <option value="38">Fox and the Hound</option>
-          <option value="18">Lord of the Rings</option>
-          <option value="1">Avengers: End Game</option>
-        </select>
-        <label>Show Times</label>
-        <select id="time">
-          <option value="1000">10 am</option>
-          <option value="1200">12 pm</option>
-          <option value="1900">7 pm</option>
-        </select>
-        <br>
-        <label>Age</label>
-        <br>
-        <input type="radio" name="age" value="adult"> Adult
-        <br>
-        <input type="radio" name="age" value="senior"> Senior: 60 and over
-        <br>
-        <input type="radio" name="age" value="child"> Child: 15 and under
-        <br>
-        <button type="submit" class="btn">Submit</button>
-      </form>
+      <div id="ticket">
+        <h5 class="section-head">Select your ticket</h5>
+        <form class="form" action="index.html" method="post">
+          <div class="group">
+            <label>Movie Title</label>
+            <select id="title">
+              <option value="38">Fox and the Hound</option>
+              <option value="18">Lord of the Rings</option>
+              <option value="1">Avengers: End Game</option>
+            </select>
+            <label>Show Times</label>
+            <select id="time">
+              <option value="1000">10 am</option>
+              <option value="1200">12 pm</option>
+              <option value="1900">7 pm</option>
+            </select>
+          </div>
+          <br>
+          <label>Age</label>
+          <br>
+          <input type="radio" name="age" value="adult"> Adult
+          <br>
+          <input type="radio" name="age" value="senior"> Senior: 60 and over
+          <br>
+          <input type="radio" name="age" value="child"> Child: 15 and under
+          <br>
+          <button type="submit" class="btn">Submit</button>
+        </form>
+      </div>
       <br>
       <div id="checkout">
-        <h5>Current Tickets</h5>
+        <h5 class="section-head">Current Tickets</h5>
         <div id="tickets">
           <!-- <div id="ticketId" class="card">
             <div class="card-body">
@@ -49,7 +54,7 @@
         </div>
         <br>
         <div id="total">
-          <h5>$<span id="cost"></span></h5>
+          <h5>Total : $<span id="cost"></span></h5>
         </div>
       </div>
     </div>

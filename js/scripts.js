@@ -99,6 +99,7 @@ function displayTicketDetails(checkout){
     htmlTicketsToDisplay += buildTicketCard(ticket);
   });
   ticketList.html(htmlTicketsToDisplay);
+  $("#cost").text(checkout.checkoutTotal);
 }
 
 function buildTicketCard(ticket){
@@ -125,12 +126,14 @@ function buildTicketCard(ticket){
 function attachTicketRemoveListeners(){
   $("#tickets").on("click", ".remove", function(event){
     newCheckout.removeTicket(parseInt(event.target.closest(".card").id));
+    newCheckout.updateTotal();
     displayTicketDetails(newCheckout);
   });
 }
 
 $(document).ready(function(){
   attachTicketRemoveListeners();
+  $("#cost").text(newCheckout.checkoutTotal);
 
   $(".form").submit(function(event){
     event.preventDefault();
